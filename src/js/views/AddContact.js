@@ -5,24 +5,28 @@ import "../../styles/addContact.css"
 
 export const AddContact = () => {
     const { store, actions } = useContext(Context);
+	
 	const [contact, setContact] = useState({
-                     "full_name": "",
-                      "email": "",
-                      "agenda_slug": "my_super_agenda",
-                      "address":"",
-                      "phone":""
+        "full_name": "",
+        "email": "",
+        "agenda_slug": "my_super_agenda",
+        "address":"",
+        "phone":""
     })
+	
     const handelSubmit = (e) => {
 		console.log("contact creado33333")
 		e.preventDefault();
 		actions.addContact(contact);
 		setContact({
+			...contact,
 			"full_name": "",
 			"email": "",
 			"agenda_slug": "my_super_agenda",
 			"address":"",
 			"phone":""
 		})
+	
 	};
 
     return(
@@ -33,19 +37,27 @@ export const AddContact = () => {
             <form onSubmit={handelSubmit}>
 					<div className="form-group">
 						<label>Full Name</label>
-						<input type="text" className="full_name" placeholder="Full Name" name="full_name"   />
+						<input type="text" className="full_name" placeholder="Full Name" name="full_name" 
+						value={contact.full_name}
+						onChange={(e) => setContact({ ...contact, full_name: e.target.value })} />
 					</div>
 					<div className="form-group">
 						<label>Email</label>
-						<input type="email" className="email" placeholder="Enter email" name="email"  />
+						<input type="email" className="email" placeholder="Enter email" name="email" 
+						value={contact.email}
+						onChange={(e) => setContact({ ...contact, email: e.target.value })}  />
 					</div>
 					<div className="form-group">
 						<label>Phone</label>
-						<input type="phone" className="address" placeholder="Enter phone" name="address"  />
+						<input type="phone" className="phone" placeholder="Enter phone" name="phone"
+						value={contact.phone}
+						onChange={(e) => setContact({ ...contact, phone: e.target.value })}   />
 					</div>
 					<div className="form-group">
 						<label>Address</label>
-						<input type="text" className="ddress" placeholder="Enter address" name="address"  />
+						<input type="text" className="address" placeholder="Enter address" name="address"
+						value={contact.address}
+						onChange={(e) => setContact({ ...contact, address: e.target.value })}   />
 					</div>
 					<button type="submit" className="btn btn-primary form-control">
 						save

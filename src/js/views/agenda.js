@@ -7,7 +7,7 @@ export const Agenda = () => {
     return(
         <>
         <h1>Contact List ☏</h1>
-        <CardContact contacts={store.contacts} />
+        <CardContact contacts={store.contact} />
         </>
     )
 };

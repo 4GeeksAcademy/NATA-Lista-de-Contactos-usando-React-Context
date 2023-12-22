@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contacts: "",
+			contacts: [],
 			idDelete: "",
 			contactToEdit: {}
 		},
@@ -20,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log(error, "no recibe los datos"));
 			},
 			addContact: contact => {
-				fetch("https://playground.4geeks.com/apis/fake/contact", {
+				fetch("https://playground.4geeks.com/apis/fake/contact/", {
 					method: "POST", 
 					body: JSON.stringify(contact), 
 					headers: {

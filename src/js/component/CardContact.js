@@ -7,6 +7,14 @@ import "../../styles/cardContact.css";
 export const CardContact = () => {
     const { store, actions } = useContext(Context);
 
+    let contact = {
+        full_name: "",
+        email: "",
+        address: "",
+        phone: ""
+
+    } 
+
     useEffect(() => {
         actions.getData(); 
     }, []); 
@@ -15,17 +23,7 @@ export const CardContact = () => {
         return <p>No hay contactos disponibles.</p>;
     }
 
-    /* if (!store.contacts || store.contacts.length === 0) {
-        return <p>No hay contactos disponibles.</p>;
-    } */
-	/* const [contact, setContact] = useState({
-        full_name: "",
-        email: "",
-        agenda_slug: "my_super_agenda",
-        address:"",
-        phone: ""
-    })
- */
+   
 
 
     return (
@@ -58,3 +56,4 @@ export const CardContact = () => {
         
     )
 }
+
