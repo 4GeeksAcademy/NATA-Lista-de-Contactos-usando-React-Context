@@ -1,0 +1,11 @@
+.list-container{
+    border-color: black;
+    width: 80%;
+    align-self: center;
+}
+img{
+    width: 200px;
+    height: 250px;
+    border-radius: 50%;
+    border-color: black;
+}
