@@ -1,20 +1,26 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contact: [],
+			contacts: "",
 			idDelete: "",
 			contactToEdit: {}
 		},
 		actions: {
 
 			getData: () => {
+				console.log("Llamando a getData"); 
 				fetch("https://playground.4geeks.com/apis/fake/contact/agenda")
-					.then(res => res.json())
-					.then(data => setStore({ contact: data }))
-					.catch(error => console.log(error));
+					.then(res => {
+						if (!res.ok) {
+							throw Error(res.statusText);
+						} 
+						return res.json()
+					})
+					.then(data => setStore({ contacts: data }))
+					.catch(error => console.log(error, "no recibe los datos"));
 			},
 			addContact: contact => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda", {
+				fetch("https://playground.4geeks.com/apis/fake/contact", {
 					method: "POST", 
 					body: JSON.stringify(contact), 
 					headers: {

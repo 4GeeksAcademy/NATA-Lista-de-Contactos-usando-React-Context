@@ -1,21 +1,31 @@
-import React, { useContext }  from "react";
+import React, { useContext, useEffect }  from "react";
 import { Context } from "../store/appContext";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/cardContact.css";
 
 
 export const CardContact = () => {
-    const { store } = useContext(Context);
+    const { store, actions } = useContext(Context);
+
+    useEffect(() => {
+        actions.getData(); 
+    }, []); 
+
     if (!store.contacts || store.contacts.length === 0) {
         return <p>No hay contactos disponibles.</p>;
     }
-	const [contact, setContact] = useState({
+
+    /* if (!store.contacts || store.contacts.length === 0) {
+        return <p>No hay contactos disponibles.</p>;
+    } */
+	/* const [contact, setContact] = useState({
         full_name: "",
         email: "",
+        agenda_slug: "my_super_agenda",
         address:"",
         phone: ""
     })
-
+ */
 
 
     return (
@@ -31,7 +41,7 @@ export const CardContact = () => {
                                 <button className="btn-pen"><i className="fa-regular fa-pen-to-square"/></button>
                                 <button className="btn-trash"><i className="fa-regular fa-trash-can"></i></button>
                             </div>
-                            <label className="full_name">{store.full_name}</label>
+                            <label className="full_name">{contact.full_name}</label>
                             <br />
                             <label className="email">{contact.email}</label>
                             <br />

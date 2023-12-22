@@ -1,13 +1,14 @@
 import React, {useState, useContext} from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import "../../styles/addContact.css"
 
 export const AddContact = () => {
     const { store, actions } = useContext(Context);
 	const [contact, setContact] = useState({
                      "full_name": "",
                       "email": "",
-                      "agenda_slug": "agenda_nat",
+                      "agenda_slug": "my_super_agenda",
                       "address":"",
                       "phone":""
     })
@@ -18,7 +19,7 @@ export const AddContact = () => {
 		setContact({
 			"full_name": "",
 			"email": "",
-			"agenda_slug": "agenda_nat",
+			"agenda_slug": "my_super_agenda",
 			"address":"",
 			"phone":""
 		})
@@ -32,7 +33,7 @@ export const AddContact = () => {
             <form onSubmit={handelSubmit}>
 					<div className="form-group">
 						<label>Full Name</label>
-						<input type="text" className="full_name" placeholder="Full Name" name="full_name" value={store.contact.full_name}  />
+						<input type="text" className="full_name" placeholder="Full Name" name="full_name"   />
 					</div>
 					<div className="form-group">
 						<label>Email</label>
@@ -50,7 +51,7 @@ export const AddContact = () => {
 						save
 					</button>
 					<Link className="mt-3 w-100 text-center" to="/Agenda">
-						or get back to Agenda
+						back to Agenda
 					</Link>
 				</form>
 
