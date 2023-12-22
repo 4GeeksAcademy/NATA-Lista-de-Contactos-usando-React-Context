@@ -9,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getData: () => {
 				console.log("Llamando a getData"); 
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda")
+				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/my_super_agenda")
 					.then(res => {
 						if (!res.ok) {
 							throw Error(res.statusText);

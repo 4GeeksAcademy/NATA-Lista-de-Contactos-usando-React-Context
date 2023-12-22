@@ -10,6 +10,7 @@ export const CardContact = () => {
     let contact = {
         full_name: "",
         email: "",
+        agenda_slug: "my_super_agenda",
         address: "",
         phone: ""
 
@@ -39,13 +40,13 @@ export const CardContact = () => {
                                 <button className="btn-pen"><i className="fa-regular fa-pen-to-square"/></button>
                                 <button className="btn-trash"><i className="fa-regular fa-trash-can"></i></button>
                             </div>
-                            <label className="full_name">{contact.full_name}</label>
+                            <label className="full_name">😄{contact.full_name}</label>
                             <br />
-                            <label className="email">{contact.email}</label>
+                            <label className="email">📧{contact.email}</label>
                             <br />
-                            <label className="address">{contact.address}</label>
+                            <label className="address">🏠{contact.address}</label>
                             <br />
-                            <label className="phone">{contact.phone}</label>
+                            <label className="phone">☎️{contact.phone}</label>
                         </div>
                     </div>
                 </li>
