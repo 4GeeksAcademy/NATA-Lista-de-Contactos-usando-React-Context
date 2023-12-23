@@ -1,6 +1,6 @@
 .list-container{
     border-color: black;
-    width: 80%;
+    width: 100%;
     align-self: center;
 }
 img{
@@ -8,4 +8,5 @@ img{
     height: 250px;
     border-radius: 50%;
     border-color: black;
+    padding-top: 10px;
 }

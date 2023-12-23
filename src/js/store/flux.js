@@ -35,8 +35,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ idDelete: id });
 			},
 			removeContact: () => {
+				console.log("eliminando contacto")
 				const store = getStore();
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda" + store.idDelete, {
+				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/" + store.idDelete, {
 					method: "DELETE"
 				}).then(res => {
 					if (res.ok) {
@@ -45,7 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 			editContact: (id, contact) => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda" + id, {
+				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/my_super_agenda" + id, {
 					method: "PUT",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(contact)

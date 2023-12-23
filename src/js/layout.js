@@ -12,6 +12,7 @@ import { Agenda } from "./views/agenda";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { AddContact } from "./views/AddContact";
+import { EditContact } from "./views/editContact";
 
 //create your first component
 const Layout = () => {
@@ -28,6 +29,7 @@ const Layout = () => {
 						<Route path="/agenda" element={<Agenda />} />
 						<Route path="/" element={<Agenda />} />
 						<Route path="/addContact" element={<AddContact />} />
+						<Route path="/editContact" element={<EditContact />} />
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
