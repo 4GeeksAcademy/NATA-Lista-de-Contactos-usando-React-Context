@@ -26,6 +26,7 @@ export const CardContact = () => {
     }, []);
     useEffect(() => {
         setContacts(store.contacts); //para guardar el contacto y poder obtener la info en la consola
+        
     }, [store.contacts]);
 
     if (!store.contacts || store.contacts.length === 0) {
@@ -33,7 +34,7 @@ export const CardContact = () => {
     }
 
 
-    const removeContact = async (contact,id) => {
+    const removeContact = async (id) => {
 
         try {
             const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
@@ -52,13 +53,6 @@ export const CardContact = () => {
         }
     }
 
-
-
-        const handleDelete = id => {
-            //actions.addidDelete(id);
-            actions.removeContact(id); //definir removecontact
-            actions.getData()
-        };
 
 
 
@@ -88,7 +82,7 @@ export const CardContact = () => {
 
                                     <button className="btn" ><Link to="/editContact">✏️</Link></button>
 
-                                    <button className="btn" onClick={() => handleDelete(contact.id)}>🗑️</button>
+                                    <button className="btn" onClick={() => removeContact(contact.id)}>🗑️</button>
                                 </div>
                             </div>
                         </div>
