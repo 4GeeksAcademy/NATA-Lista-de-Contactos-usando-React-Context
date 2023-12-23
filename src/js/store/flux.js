@@ -31,20 +31,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => console.log("creado", response))
 					.catch(error => console.error("Error:", error));
 			},
-			addidDelete: id => {
+			/* addidDelete: id => {
 				setStore({ idDelete: id });
-			},
-			/* removeContact: () => {
-				console.log("eliminando contacto")
-				const store = getStore();
-				fetch("https://playground.4geeks.com/apis/fake/contact/" + store.idDelete, {
-					method: "DELETE"
-				}).then(res => {
-					if (res.ok) {
-						getActions().getData();
-					}
-				});
 			}, */
+			
 
 			removeContact: async (id) => {
 
@@ -64,51 +54,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 		
 				}
 			},
-			editContact: (id, contact) => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/" + id, {//´${api}/${id}´
-					method: "PUT",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(contact)
-				})
-					.then(res => res.json())
-					.then(results => console.log(setStore({ contact: results }), "estoy en setStore"))
-					.catch(error => console.log("Error", error));
+			editContact: async (contact, id) => {
+				console.log("editContactFlux")
+				try{
+					const response = await fetch("https://playground.4geeks.com/apis/fake/contact" + id, {
+						method: "PUT",
+						headers:  { "Content-Type": "application/json" },
+						body: JSON.stringify(contact)
+					})
+					if (!response.ok) {
+						throw new Error("No se pudo editar el usuario");
+					}
+					if (response.ok){
+					actions.getData();// Actualizar la lista de contactos después de eliminar
+					}
+				} catch(error){}
 			},
+
+
+
 			getContact: contact => {
 				setStore({ contactToEdit: contact });
 			}
 			
-		}
-	};
-};
+			}
+	}
+}
 
 export default getState;
-
-
-
-
-
-
-
-			// Use getActions to call a function within a fuction
-			//exampleFunction: () => {
-			//	getActions().changeColor(0, "green");
-			//},
-			//loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			//},
-			//changeColor: (index, color) => {
-				//get the store
-				//const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				//const demo = store.demo.map((elm, i) => {
-					//if (i === index) elm.background = color;
-					//return elm;
-				//});
-
-				//reset the global store
-				//setStore({ demo: demo });
