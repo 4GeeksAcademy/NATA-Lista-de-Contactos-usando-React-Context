@@ -1,30 +1,49 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import Swal from "sweetalert2";
 import "../../styles/addContact.css"
 
 
 export const EditContact = () => {
-	//buscar el usuario x el id, cargar los datos con el useefect
-
-
-	console.log("entre a la funcion")
+	console.log("entre al componente")
 	const { id } = useParams(); // Obtener el ID de la URL
 	const { store, actions } = useContext(Context);
 	const [contact, setContact] = useState({
-
-		full_name: store.full_name,
-		email: store.email,
+		full_name: "",
+		email: "",
 		agenda_slug: "my_super_agenda",
-		address: store.address,
-		phone: store.phone,
+		address: "",
+		phone: "",
 		id: id
 	});
+
+	useEffect(() => {
+		const fetchContact = async () => {
+			try {
+				const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`)
+				if(!response.ok){
+					throw new Error("no carga el contactp")
+				}
+				const data = await response.json()
+				setContact({
+					full_name: data.full_name,
+					email: data.email,
+					agenda_slug: data.agenda_slug,
+					address: data.address,
+					phone: data.phone,
+					id: id
+				})
+			}catch(error){
+				console.error(error)
+			}
+		}
+		fetchContact();
+	}, [id]);
 
 	const handelSubmit = async (e) => {
 		console.log("handleSubmit")
 		e.preventDefault();
-	//action.editContact(contact, id)
 
 		try {
 			
@@ -37,27 +56,34 @@ export const EditContact = () => {
 				console.log("No se pudo editar el usuario");
 			}
 			if (response.ok) {
-				//setContact()
 				console.log("editado")
+				// Mostrar alerta SweetAlert al editar con éxito
+                Swal.fire({
+                    icon: 'success',
+                    title: 'User edited successfully!',
+                   // showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    //cancelButtonColor: '#d33',
+                    confirmButtonText: 'Go to Agenda'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Redireccionar a '/Agenda' al confirmar la alerta
+                        window.location.href = '/Agenda';
+                    }
+				})
 			}
-			else {
-
-				handleChange(e);
-			}
-
-			actions.getData();
+			//actions.getData()
 		} catch (error) {
 			console.error(error)
-			//handleChange(e);
 		}
 	}
 
 	const handleChange = e => {
 		const { name, value } = e.target;
 		setContact({ ...contact, [name]: value });
-		/*  setContact({ ...contact, [e.target.name]: e.target.value, [e.target.email]: e.target.value,
-			 [e.target.phone]: e.target.value, [e.target.address]: e.target.value  }); */
 	};
+	
+
 
 
 	return (
@@ -90,6 +116,7 @@ export const EditContact = () => {
 							value={contact.address}
 							onChange={handleChange} />
 					</div>
+					
 					<button type="submit" className="btn btn-primary form-control" >
 						save
 					</button>
@@ -97,6 +124,7 @@ export const EditContact = () => {
 						back to Agenda
 					</Link>
 				</form>
+				
 
 			</div>
 		</div>
