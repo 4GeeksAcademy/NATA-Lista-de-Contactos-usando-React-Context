@@ -34,19 +34,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addidDelete: id => {
 				setStore({ idDelete: id });
 			},
-			removeContact: () => {
+			/* removeContact: () => {
 				console.log("eliminando contacto")
 				const store = getStore();
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/" + store.idDelete, {
+				fetch("https://playground.4geeks.com/apis/fake/contact/" + store.idDelete, {
 					method: "DELETE"
 				}).then(res => {
 					if (res.ok) {
 						getActions().getData();
 					}
 				});
+			}, */
+
+			removeContact: async (id) => {
+
+				try {
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+						method: "DELETE"
+					})
+					if (!response.ok) {
+						throw new Error("No se pudo eliminar el usuario");
+					}
+					if (response.ok){
+					actions.getData();// Actualizar la lista de contactos después de eliminar
+					}
+					
+		
+				} catch (error) {
+		
+				}
 			},
 			editContact: (id, contact) => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/my_super_agenda" + id, {
+				fetch("https://playground.4geeks.com/apis/fake/contact/" + id, {//´${api}/${id}´
 					method: "PUT",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(contact)
